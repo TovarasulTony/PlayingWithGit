@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Pick Up
+  - EndOfMap
+  - Wall_Test
+  - Jumper
   layers:
   - Default
   - TransparentFX
