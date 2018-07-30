@@ -18,17 +18,22 @@ public class Pusher : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(tempFloat);
         tempFloat += Time.deltaTime;
         //Debug.Log(tempBool);
-        if (tempBool == true && tempFloat > time)
-        {
+        if (tempBool == true && tempFloat > time*2)
+        {//3.4
             tempBool = false;
             tempFloat -= time;
+            tempFloat *= -1;
+            //tempFloat = 0;
         }
         else if (tempBool == false && tempFloat > time*2)
         {
             tempBool = true;
             tempFloat -= time*2;
+            tempFloat *= -1;
+            //tempFloat = 0;
         }
 
         if (tempBool == true)
@@ -37,7 +42,7 @@ public class Pusher : MonoBehaviour {
         }
         else
         {
-            transform.Translate(Vector3.right * Time.deltaTime*speed);
+            transform.Translate(Vector3.right * Time.deltaTime*2*speed);
         }
     }
 }
