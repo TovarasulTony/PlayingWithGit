@@ -9,8 +9,25 @@ public class PlayerController : MonoBehaviour {
     public Text countText;
     public Text winText;
     private bool b;
+    private bool collisionTest;
     private Rigidbody rb ;
     private int count;
+
+
+    void Saritura()
+    {
+        Vector3 jump = new Vector3(0.0f, 10, 0.0f);
+
+        //Debug.Log("In afara if-ului " + other.gameObject.tag + " " + Input.GetKeyDown("space"));
+
+        if (b && collisionTest)
+        {
+            //Debug.Log("In if " + other.gameObject.tag);
+            rb.AddForce(jump, ForceMode.Impulse);
+            test.text = "jump";
+        }
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -18,15 +35,19 @@ public class PlayerController : MonoBehaviour {
         SetCountText();
         winText.text = "";
         test.text = "";
+        collisionTest = false;
     }
 
-      void Update()
+
+
+    void Update()
     {
         b = Input.GetKeyDown("space");
         if(Input.GetKeyDown("space"))
         {
             Debug.Log("SPACE WAS PRESSED");
         }
+        Saritura();
     }
     
     void FixedUpdate()
@@ -49,32 +70,18 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-    void Saritura(Collision other)
-    {
-        Vector3 jump = new Vector3(0.0f, 10, 0.0f);
-
-        Debug.Log("In afara if-ului " + other.gameObject.tag + " " + Input.GetKeyDown("space"));
-
-        if (b && other.gameObject.CompareTag("Ground"))
-        {
-            Debug.Log("In if " + other.gameObject.tag);
-            rb.AddForce(jump, ForceMode.Impulse);
-            test.text = "jump";
-        }
-    }
+   
  
-    void OnCollisionStay(Collision other)  
+    void OnCollisionEnter(Collision other)  
     {
-
-        Saritura(other);
- 
+        if(other.gameObject.CompareTag("Ground"))
+            collisionTest = true;
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnCollisionExit(Collision other)
     {
-
-        Saritura(other);
-
+        if (other.gameObject.CompareTag("Ground"))
+            collisionTest = false;
     }
 
     void OnTriggerEnter(Collider other)

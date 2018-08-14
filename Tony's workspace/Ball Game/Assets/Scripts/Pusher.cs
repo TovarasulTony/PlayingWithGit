@@ -18,7 +18,7 @@ public class Pusher : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(tempFloat);
+        //Debug.Log(tempFloat);
         tempFloat += Time.deltaTime;
         //Debug.Log(tempBool);
         if (tempBool == true && tempFloat > time*2)
